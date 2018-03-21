@@ -53,11 +53,11 @@ function CalcFP(){
     var m = new Date();
     var month = m.getMonth();
     var day = d.getDate();
-    if(month == 0){
+    if(month == 4){
     day -= 7;
     totalSwipes = totalSwipes - (day * 2);
     }
-    else if(month == 1){
+    else if(month == 5){
     totalSwipes -= 48;   
     totalSwipes = totalSwipes - ((day + 1) * 2);
     }
