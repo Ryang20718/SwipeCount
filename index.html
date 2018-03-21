@@ -47,8 +47,8 @@
     
 <script>
 function CalcFP(){
-    //Function for 14P
-      var totalSwipes = 151;
+    //Total Swipes for 14P
+    var totalSwipes = 151;
     var d = new Date();
     var m = new Date();
     var month = m.getMonth();
@@ -73,7 +73,7 @@ return display;
     
     
 function CalcF(){
-    //Function for 14
+//Total Swipes for 14
 var totalSwipes = 14;
 var d = new Date();
 var day = d.getDay();
@@ -103,52 +103,46 @@ var display = "Your total Swipes left for this week should be: " + totalSwipes;
 return display;
 }
     
-    
+ //======For 19P   
 function CalcN(){
-    //Function for 19
-    var totalSwipes = 203;
+var dayOfYear = getDayOfYear();
+dayOfYear -= 7;
+var extraDays = [0,2,5,8,11,14,17];
+var totalSwipes = 203;// start off with # of swipes
+totalSwipes = totalSwipes - (Math.floor(dayOfYear/7)) * 19 - extraDays[dayOfYear%7];
+    
+   
+//EXTRA HOLIDAYS
+
+var holidays = [0,8,43,75];
+for(var x = 0; x < 4; x++){
+    if(dayOfYear > holidays[x]){
+        totalSwipes++;
+    }
+}
+
+    
+    
+    
+var display = "Your total Swipes left should be: " + totalSwipes;
+return display;
+
+}
+
+function getDayOfYear(){
     var d = new Date();
     var m = new Date();
     var month = m.getMonth();
     var day = d.getDate();
-    if(month == 0){
-    day -= 6;
-    if(day < 6){
-    totalSwipes -= 3;
-    totalSwipes -= ((day-3) * 3);   
-    }else if (day < 12){
-        totalSwipes -= 4;
-    totalSwipes -= ((day-4) * 3);  
-    }else if (day < 13 ){
-        totalSwipes -= 6;
-    totalSwipes -= ((day-5) * 3);  
-    }else if (day < 14){
-        totalSwipes -= 8;
-    totalSwipes -= ((day-6) * 3);  
-    }else if (day < 20){
-        totalSwipes -= 10;
-    totalSwipes -= ((day-7) * 3);  
-    }else if (day < 21){
-        totalSwipes -= 11;
-    totalSwipes -= ((day-8) * 3);  
-    }else{
-        totalSwipes -= 13;
-      totalSwipes -= ((day-9) * 3);   
-    }
+    var array = [31,28,31,30,31,30,31,31,30,31,30,31];
+    var dayOfYear = 0;
     
+    for(var x = 0; x < month; x++){
+        dayOfYear += array[x];
     }
-    else if(month == 1){
-    totalSwipes -= 66;   
-    totalSwipes = totalSwipes - ((day + 1) * 2);
-    }
-    else{
-    totalSwipes -= 75; 
-    totalSwipes = totalSwipes - ((day + 1) * 2);
-    }
-
-var display = "Your total Swipes left should be: " + totalSwipes;
-return display;
-
+    dayOfYear += day;
+    
+    return dayOfYear;
 }
     
     
